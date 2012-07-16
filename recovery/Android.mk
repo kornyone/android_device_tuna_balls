@@ -1,4 +1,4 @@
-ifneq (,$(findstring $(TARGET_DEVICE),tuna toro torospr maguro toroplus))
+ifneq (,$(findstring $(TARGET_DEVICE),tuna toro torospr maguro toroplus steelhead))
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)

@@ -49,9 +49,9 @@ PRODUCT_PACKAGES += \
 	tuna_hdcp_keys
 
 PRODUCT_COPY_FILES := \
-	device/samsung/tuna/init.tuna.rc:root/init.tuna.rc \
-	device/samsung/tuna/init.tuna.usb.rc:root/init.tuna.usb.rc \
-	device/samsung/tuna/ueventd.tuna.rc:root/ueventd.tuna.rc \
+	device/samsung/tuna/init.steelhead.rc:root/init.steelhead.rc \
+	device/samsung/tuna/init.steelhead.usb.rc:root/init.steelhead.usb.rc \
+	device/samsung/tuna/ueventd.steelhead.rc:root/ueventd.steelhead.rc \
 	device/samsung/tuna/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/tuna/gps.conf:system/etc/gps.conf
 
