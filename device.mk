@@ -29,9 +29,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PACKAGES := \
-	lights.tuna \
-	charger \
-	charger_res_images
+	lights.tuna
 
 PRODUCT_PACKAGES += \
 	sensors.tuna \
@@ -52,8 +50,7 @@ PRODUCT_COPY_FILES := \
 	device/samsung/tuna/init.steelhead.rc:root/init.steelhead.rc \
 	device/samsung/tuna/init.steelhead.usb.rc:root/init.steelhead.usb.rc \
 	device/samsung/tuna/ueventd.steelhead.rc:root/ueventd.steelhead.rc \
-	device/samsung/tuna/media_profiles.xml:system/etc/media_profiles.xml \
-	device/samsung/tuna/gps.conf:system/etc/gps.conf
+	device/samsung/tuna/media_profiles.xml:system/etc/media_profiles.xml
 
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
@@ -71,10 +68,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
 	wifi.supplicant_scan_interval=15
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
-
 # NFC
 PRODUCT_PACKAGES += \
         libnfc \
@@ -89,44 +82,19 @@ PRODUCT_PACKAGES += \
         VisualizationWallpapers \
         librs_jni
 
-# Key maps
-PRODUCT_COPY_FILES += \
-	device/samsung/tuna/tuna-gpio-keypad.kl:system/usr/keylayout/tuna-gpio-keypad.kl \
-	device/samsung/tuna/tuna-gpio-keypad.kcm:system/usr/keychars/tuna-gpio-keypad.kcm \
-	device/samsung/tuna/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/tuna/sec_jack.kcm:system/usr/keychars/sec_jack.kcm
-
-# Input device calibration files
-PRODUCT_COPY_FILES += \
-	device/samsung/tuna/Melfas_MMSxxx_Touchscreen.idc:system/usr/idc/Melfas_MMSxxx_Touchscreen.idc
-
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-	frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-	frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
 	frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
 	frameworks/base/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
-	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/base/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-
-# HACK: copy panda init for now to boot on both boards
-PRODUCT_COPY_FILES += \
-	device/ti/panda/init.omap4pandaboard.rc:root/init.omap4pandaboard.rc
-
-# Melfas touchscreen firmware
-PRODUCT_COPY_FILES += \
-    device/samsung/tuna/mms144_ts_rev31.fw:system/vendor/firmware/mms144_ts_rev31.fw \
-    device/samsung/tuna/mms144_ts_rev32.fw:system/vendor/firmware/mms144_ts_rev32.fw
 
 # Portrait dock image
 PRODUCT_COPY_FILES += \
