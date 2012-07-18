@@ -9,9 +9,9 @@ on early-init
 
 on early-boot
 	setprop ro.audio.flinger_standbytime_ms 600000
-    setprop ro.common_time.auto_disable 0
-    setprop ro.common_time.allow_wifi 1
-    setprop ro.common_time.server_prio 10
+	setprop ro.common_time.auto_disable 0
+	setprop ro.common_time.allow_wifi 1
+	setprop ro.common_time.server_prio 10
 
 on post-fs-data
 	# we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -58,26 +58,26 @@ on fs
 	chown media media /dev/i2c-2
 
 # change permissions for Tiler driver
-    chmod 0777 /dev/tiler
-    chmod 0777 /dev/dmm
+	chmod 0777 /dev/tiler
+	chmod 0777 /dev/dmm
 
 # change permissions for gamma settings
-    chmod 0666 /sys/devices/platform/omapdss/manager0/gamma
+	chmod 0666 /sys/devices/platform/omapdss/manager0/gamma
 
 # change permissions for ION driver
-    chmod 0777 /dev/ion
+	chmod 0777 /dev/ion
 
 # We chown/chmod /factory because mount is run as root + defaults
-    chown radio radio /factory
-    chmod 0775 /factory
+	chown radio radio /factory
+	chmod 0775 /factory
 
 # add symlink for HDCP key
-    symlink /factory/hdcp.keys /system/vendor/firmware/hdcp.keys
+	symlink /factory/hdcp.keys /system/vendor/firmware/hdcp.keys
 
 # nfc
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
+	setprop ro.nfc.port "I2C"
+	chmod 0600 /dev/pn544
+	chown nfc nfc /dev/pn544
 
 # permissions for bluetooth.
 	setprop ro.bt.bdaddr_path "/sys/module/board_steelhead_bluetooth/parameters/btaddr"
