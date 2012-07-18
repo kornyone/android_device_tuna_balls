@@ -123,5 +123,4 @@ void Register_librecovery_updater_tuna() {
     fprintf(stderr, "installing samsung updater extensions\n");
 
     RegisterFunction("samsung.write_bootloader", WriteBootloaderFn);
-    RegisterFunction("samsung.fs_size_fix", FsSizeFixFn);
 }
