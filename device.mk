@@ -126,8 +126,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
 
+# Force Tablet DPI for now
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.sf.lcd_density=320
+	ro.sf.lcd_density=160
+
+# Enable adb via networking port 4321 as in stock Q
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.adb.tcp.port 4321
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
