@@ -25,8 +25,8 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/tuna/overlay
 # currently contain all of the bitmaps at xhdpi density so
 # we do this little trick to fall back to the hdpi version
 # if the xhdpi doesn't exist.
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi tvdpi
-PRODUCT_AAPT_PREF_CONFIG := tvdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi tvdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PACKAGES := \
 	lights.tuna
@@ -128,7 +128,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Force Tablet DPI for now
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.sf.lcd_density=160
+	ro.sf.lcd_density=320
 
 # Enable adb via networking port 4321 as in stock Q
 PRODUCT_PROPERTY_OVERRIDES += \
