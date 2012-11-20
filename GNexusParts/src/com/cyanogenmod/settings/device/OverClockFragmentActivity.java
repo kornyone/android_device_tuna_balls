@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The CyanogenMod Project
+ * Copyright (C) 2012 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.cyanogenmod.settings.device;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -29,26 +29,30 @@ import android.util.Log;
 
 import com.cyanogenmod.settings.device.R;
 
-public class DisplayFragmentActivity extends PreferenceFragment {
+public class OverClockFragmentActivity extends PreferenceFragment {
 
-    private ColorTuningPreference mColorTuning;
-    private GammaTuningPreference mGammaTuning;
-    private ColorHackPresets mColorHackPresets;
+    private static final String PREF_ENABLED = "1";
+    private static final String TAG = "GNexParts_OverClock";
+
+    private ListPreference mGpuOverclock;
+    private ListPreference mTouchscreenClock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.display_preferences);
+        addPreferencesFromResource(R.xml.overclock_preferences);
 
-        mColorTuning = (ColorTuningPreference) findPreference(DeviceSettings.KEY_COLOR_TUNING);
-        mColorTuning.setEnabled(ColorTuningPreference.isSupported());
+        PreferenceScreen prefSet = getPreferenceScreen();
 
-        mGammaTuning = (GammaTuningPreference) findPreference(DeviceSettings.KEY_GAMMA_TUNING);
-        mGammaTuning.setEnabled(GammaTuningPreference.isSupported());
+        mGpuOverclock = (ListPreference) findPreference(DeviceSettings.KEY_GPU_OVERCLOCK);
+        mGpuOverclock.setEnabled(GpuOverclock.isSupported());
+        mGpuOverclock.setOnPreferenceChangeListener(new GpuOverclock());
+        GpuOverclock.updateSummary(mGpuOverclock, Integer.parseInt(mGpuOverclock.getValue()));
 
-        mColorHackPresets = (ColorHackPresets) findPreference(DeviceSettings.KEY_COLORGAMMA_PRESETS);
-        mColorHackPresets.setEnabled(ColorHackPresets.isSupported());
     }
 
+    public static void restore(Context context) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+    }
 }

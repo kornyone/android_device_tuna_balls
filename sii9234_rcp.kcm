@@ -1,4 +1,4 @@
-# Copyright (C) 2011 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH:= $(call my-dir)
-include $(CLEAR_VARS)
+type SPECIAL_FUNCTION
 
-LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
+key NUMPAD_0 {
+    label, base: '0'
+}
 
-LOCAL_SRC_FILES := dumpstate.c
+key NUMPAD_1 {
+    label, base: '1'
+}
 
-LOCAL_MODULE := libdumpstate.tuna
+key NUMPAD_2 {
+    label, base: '2'
+}
 
-LOCAL_MODULE_TAGS := optional
+key NUMPAD_3 {
+    label, base: '3'
+}
 
-include $(BUILD_STATIC_LIBRARY)
+key NUMPAD_4 {
+    label, base: '4'
+}
+
+key NUMPAD_5 {
+    label, base: '5'
+}
+
+key NUMPAD_6 {
+    label, base: '6'
+}
+
+key NUMPAD_7 {
+    label, base: '7'
+}
+
+key NUMPAD_8 {
+    label, base: '8'
+}
+
+key NUMPAD_9 {
+    label, base: '9'
+}
+
+key NUMPAD_DOT {
+    label, base: '.'
+}
+
+key NUMPAD_ENTER {
+    label, base: '\n'
+}

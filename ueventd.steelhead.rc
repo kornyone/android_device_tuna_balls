@@ -1,6 +1,6 @@
 #for DSSCOMP
-/dev/dsscomp              0666   system    system
-/dev/tiler                0666   system    system
+/dev/dsscomp              0660   system     system
+/dev/tiler                0666   system     system
 
 #for SYSLINK
 /dev/rpmsg-omx0           0660   drmrpc    drmrpc

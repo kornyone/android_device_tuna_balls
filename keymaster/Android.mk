@@ -12,15 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH:= $(call my-dir)
+ifeq ($(TARGET_BOARD_PLATFORM),omap4)
+ifeq ($(BOARD_USES_SECURE_SERVICES),true)
+
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
+LOCAL_MODULE := keystore.tuna
 
-LOCAL_SRC_FILES := dumpstate.c
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
-LOCAL_MODULE := libdumpstate.tuna
+LOCAL_SRC_FILES := \
+	keymaster_tuna.cpp
+
+LOCAL_C_INCLUDES := \
+	libcore/include \
+	external/openssl/include \
+	hardware/ti/omap4xxx/security/tf_sdk/include
+
+LOCAL_CFLAGS := -fvisibility=hidden -Wall -Werror
+
+LOCAL_SHARED_LIBRARIES := libcutils liblog libcrypto libtf_crypto_sst
 
 LOCAL_MODULE_TAGS := optional
 
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
+
+endif # ifeq ($(BOARD_USES_SECURE_SERVICES),true)
+endif # ifeq ($(TARGET_BOARD_PLATFORM),omap4)

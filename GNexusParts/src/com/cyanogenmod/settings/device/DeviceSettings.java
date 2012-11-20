@@ -32,6 +32,7 @@ import android.os.IBinder;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 
 import com.cyanogenmod.settings.device.R;
 
@@ -43,9 +44,11 @@ public class DeviceSettings extends Activity {
     public static final String ACTION_UPDATE_PREFERENCES = "com.cyanogenmod.settings.device.UPDATE";
     public static final String KEY_COLOR_TUNING = "color_tuning";
     public static final String KEY_GAMMA_TUNING = "gamma_tuning";
+    public static final String KEY_COLORGAMMA_PRESETS = "colorgamma_presets";
     public static final String KEY_VIBRATOR_TUNING = "vibrator_tuning";
     public static final String KEY_CATEGORY_RADIO = "category_radio";
     public static final String KEY_HSPA = "hspa";
+    public static final String KEY_GPU_OVERCLOCK = "gpu_overclock";
 
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -62,12 +65,15 @@ public class DeviceSettings extends Activity {
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE, ActionBar.DISPLAY_SHOW_TITLE);
         bar.setTitle(R.string.app_name);
+        bar.setDisplayHomeAsUpEnabled(true);
 
         mTabsAdapter = new TabsAdapter(this, mViewPager);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.display_title),
                 DisplayFragmentActivity.class, null);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.general_title),
                 GeneralFragmentActivity.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_speed_title),
+                OverClockFragmentActivity.class, null);
 
         if (savedInstanceState != null) {
             bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
@@ -155,6 +161,16 @@ public class DeviceSettings extends Activity {
 
         @Override
         public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            DeviceSettings.this.onBackPressed();
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 }

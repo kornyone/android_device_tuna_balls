@@ -35,7 +35,7 @@ BOARD_KERNEL_BASE := 0x80000000
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := omap4
 TARGET_BOOTLOADER_BOARD_NAME := tuna
-TARGET_BOARD_INFO_FILE := device/samsung/tuna/board-info.txt
+TARGET_BOARD_INFO_FILE ?= device/samsung/tuna/board-info.txt
 
 BOARD_EGL_CFG := device/samsung/tuna/egl.cfg
 BOARD_CREATE_TUNA_HDCP_KEYS_SYMLINK := true
@@ -43,6 +43,9 @@ BOARD_CREATE_TUNA_HDCP_KEYS_SYMLINK := true
 #BOARD_USES_HGL := true
 #BOARD_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
+
+# set if the target supports FBIO_WAITFORVSYNC
+TARGET_HAS_WAITFORVSYNC := true
 
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TARGET_RECOVERY_UI_LIB := librecovery_ui_tuna

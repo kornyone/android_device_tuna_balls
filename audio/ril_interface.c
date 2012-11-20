@@ -36,7 +36,6 @@ int (*_ril_is_connected)(void *);
 int (*_ril_disconnect)(void *);
 int (*_ril_set_call_volume)(void *, enum ril_sound_type, int);
 int (*_ril_set_call_audio_path)(void *, enum ril_audio_path);
-int (*_ril_set_call_clock_sync)(void *, enum ril_clock_state);
 int (*_ril_register_unsolicited_handler)(void *, int, void *);
 int (*_ril_get_wb_amr)(void *, void *);
 
@@ -72,7 +71,7 @@ static int ril_connect_if_required(struct ril_handle *ril)
         return 0;
 
     if (_ril_connect(ril->client) != RIL_CLIENT_ERR_SUCCESS) {
-        LOGE("ril_connect() failed");
+        ALOGE("ril_connect() failed");
         return -1;
     }
 
@@ -94,7 +93,7 @@ int ril_open(struct ril_handle *ril)
     ril->handle = dlopen(RIL_CLIENT_LIBPATH, RTLD_NOW);
 
     if (!ril->handle) {
-        LOGE("Cannot open '%s'", RIL_CLIENT_LIBPATH);
+        ALOGE("Cannot open '%s'", RIL_CLIENT_LIBPATH);
         return -1;
     }
 
@@ -105,7 +104,6 @@ int ril_open(struct ril_handle *ril)
     _ril_disconnect = dlsym(ril->handle, "Disconnect_RILD");
     _ril_set_call_volume = dlsym(ril->handle, "SetCallVolume");
     _ril_set_call_audio_path = dlsym(ril->handle, "SetCallAudioPath");
-    _ril_set_call_clock_sync = dlsym(ril->handle, "SetCallClockSync");
     _ril_register_unsolicited_handler = dlsym(ril->handle,
                                               "RegisterUnsolicitedHandler");
     /* since this function is not supported in all RILs, don't require it */
@@ -113,16 +111,15 @@ int ril_open(struct ril_handle *ril)
 
     if (!_ril_open_client || !_ril_close_client || !_ril_connect ||
         !_ril_is_connected || !_ril_disconnect || !_ril_set_call_volume ||
-        !_ril_set_call_audio_path || !_ril_set_call_clock_sync ||
-        !_ril_register_unsolicited_handler) {
-        LOGE("Cannot get symbols from '%s'", RIL_CLIENT_LIBPATH);
+        !_ril_set_call_audio_path || !_ril_register_unsolicited_handler) {
+        ALOGE("Cannot get symbols from '%s'", RIL_CLIENT_LIBPATH);
         dlclose(ril->handle);
         return -1;
     }
 
     ril->client = _ril_open_client();
     if (!ril->client) {
-        LOGE("ril_open_client() failed");
+        ALOGE("ril_open_client() failed");
         dlclose(ril->handle);
         return -1;
     }
@@ -148,7 +145,7 @@ int ril_close(struct ril_handle *ril)
 
     if ((_ril_disconnect(ril->client) != RIL_CLIENT_ERR_SUCCESS) ||
         (_ril_close_client(ril->client) != RIL_CLIENT_ERR_SUCCESS)) {
-        LOGE("ril_disconnect() or ril_close_client() failed");
+        ALOGE("ril_disconnect() or ril_close_client() failed");
         return -1;
     }
 
@@ -172,12 +169,4 @@ int ril_set_call_audio_path(struct ril_handle *ril, enum ril_audio_path path)
         return 0;
 
     return _ril_set_call_audio_path(ril->client, path);
-}
-
-int ril_set_call_clock_sync(struct ril_handle *ril, enum ril_clock_state state)
-{
-    if (ril_connect_if_required(ril))
-        return 0;
-
-    return _ril_set_call_clock_sync(ril->client, state);
 }
